@@ -19,6 +19,7 @@ const Point = sequelize.define("points", {
     point: {
         type: Sequelize.INTEGER,
     },
+
     createdAt: {
         type: Sequelize.DATE,
         field: 'created_at',

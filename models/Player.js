@@ -19,6 +19,12 @@ const Player = sequelize.define("players", {
     description: {
         type: Sequelize.STRING,
     },
+    isPlaying: {
+        type: Sequelize.BOOLEAN,
+        field: "is_playing",
+        defaultValue: false,
+
+    },
     image: {
         type: Sequelize.TEXT
     },
@@ -36,7 +42,7 @@ const Player = sequelize.define("players", {
 
 exports.getAllPlayers = async () => {
     const players = await Player.findAll({
-        attributes: ["id", "name", "description", "image"],
+        attributes: ["id", "name", "description", "isPlaying", "image"],
     });
     return JSON.parse(JSON.stringify(players));
 };
