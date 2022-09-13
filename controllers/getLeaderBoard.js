@@ -13,6 +13,8 @@ exports.getLeaderboard = async ctx => {
             if (!player.total_point) {
                 player.total_point = 0
             }
+
+            player.total_point = Number(player.total_point)
             return player
         })
         leaderboard.sort((a, b) => {
