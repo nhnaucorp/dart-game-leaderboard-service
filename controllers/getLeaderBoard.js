@@ -8,7 +8,9 @@ exports.getLeaderboard = async ctx => {
     try {
         const players = await getAllPlayers()
         const playerTotalPoint = await getTotalPointByPlyer()
-        const mergePlayersAndPoints = players.map((item, i) => Object.assign({}, item, playerTotalPoint[i]));
+        console.log("Players", players);
+        console.log("PlayerTotalPoint", playerTotalPoint);
+        const mergePlayersAndPoints = players.map((item, i) => Object.assign({}, item, playerTotalPoint[i - 1]));
         const leaderboard = mergePlayersAndPoints.map(player => {
             if (!player.total_point) {
                 player.total_point = 0

@@ -48,6 +48,9 @@ exports.getAllPlayers = async () => {
 };
 
 
+exports.setCurrentPlayerModel = async (id) => {
+
+}
 
 exports.getPlayerInfo = async (id) => {
     const player = await Player.findByPk(id);
