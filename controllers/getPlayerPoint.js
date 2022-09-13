@@ -4,8 +4,8 @@ const { getPointByPlayerId } = require("../models/Point");
 
 exports.getPointByPlayerId = async ctx => {
     try {
-        const { id } = ctx.params
-        const playerPoint = await getPointByPlayerId(id)
+        const { playerId } = ctx.params
+        const playerPoint = await getPointByPlayerId(playerId)
         ctx.response.body = playerPoint;
 
     } catch (err) {

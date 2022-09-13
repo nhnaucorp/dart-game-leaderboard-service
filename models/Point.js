@@ -53,19 +53,10 @@ exports.updatePlayerPoint = async (pointId, playerId) => {
 
 exports.getTotalPointByPlyer = async () => {
 
-    // const playerTotalPoint = await Point.sum('point', {
-    //     group: 'player_id'
-    // });
-    // const playerTotalPoint = await Point.findAll({
-    //     attributes: [sequelize.fn("SUM", sequelize.col("point")), "playerId"],
-    //     group: ['player_id']
-    // })
-    // console.log(playerTotalPoint);
-    // const playerTotalPoint = await Point.sum('point', {
-    //     group: 'player_id'
-    // });
+
 
     const playerTotalPoint = await Point.findAll({
+
         attributes: [
             'player_id',
             [sequelize.fn('sum', sequelize.col('point')), 'total_point'],
