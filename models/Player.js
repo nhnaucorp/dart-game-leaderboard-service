@@ -41,3 +41,12 @@ exports.AllPlayers = async () => {
     return JSON.parse(JSON.stringify(players));
   };
   
+
+
+  exports.getPlayerId = async (id) => {
+    const players = await Player.findAll({
+      attributes: ["id", "name", "description","image"],
+    });
+    return JSON.parse(JSON.stringify(players));
+  };
+  

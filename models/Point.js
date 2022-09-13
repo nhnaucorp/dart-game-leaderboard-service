@@ -31,4 +31,18 @@ const Point = sequelize.define("points", {
 
 });
 
-export default Point
+exports.getPointByPlayerId = async (id) => {
+
+
+
+}
+
+exports.addPlayerPoint = async (playerId,point) => {
+    const playerPoint = await Point.create({ playerId: playerId, point: point});
+    console.log(playerPoint);
+    return playerPoint;
+
+}
+
+exports.updatePlayerPoint = async (pointId, playerId) => {
+}
