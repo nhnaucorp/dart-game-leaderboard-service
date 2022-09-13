@@ -31,18 +31,47 @@ const Point = sequelize.define("points", {
 
 });
 
-exports.getPointByPlayerId = async (id) => {
-
-
+exports.getPointByPlayerId = async (playerId) => {
+    const playerPoints = await Point.findAll({
+        where: {
+            playerId: playerId
+        }
+    });
+    return playerPoints
 
 }
 
-exports.addPlayerPoint = async (playerId,point) => {
-    const playerPoint = await Point.create({ playerId: playerId, point: point});
-    console.log(playerPoint);
+exports.addPlayerPoint = async (playerId, point) => {
+    const playerPoint = await Point.create({ playerId: playerId, point: point });
     return playerPoint;
 
 }
 
 exports.updatePlayerPoint = async (pointId, playerId) => {
+}
+
+
+exports.getTotalPointByPlyer = async () => {
+
+    // const playerTotalPoint = await Point.sum('point', {
+    //     group: 'player_id'
+    // });
+    // const playerTotalPoint = await Point.findAll({
+    //     attributes: [sequelize.fn("SUM", sequelize.col("point")), "playerId"],
+    //     group: ['player_id']
+    // })
+    // console.log(playerTotalPoint);
+    // const playerTotalPoint = await Point.sum('point', {
+    //     group: 'player_id'
+    // });
+
+    const playerTotalPoint = await Point.findAll({
+        attributes: [
+            'player_id',
+            [sequelize.fn('sum', sequelize.col('point')), 'total_point'],
+        ],
+        group: ['player_id'],
+        raw: true
+    });
+    return playerTotalPoint
 }

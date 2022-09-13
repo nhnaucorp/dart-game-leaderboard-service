@@ -13,7 +13,6 @@ exports.addPlayerPoint = async ctx => {
             }
         }
         const { point } = ctx.request.body
-        console.log(point, id);
         const playerPoint = await addPlayerPoint(id, point)
         ctx.response.body = playerPoint;
 

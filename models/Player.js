@@ -34,17 +34,17 @@ const Player = sequelize.define("players", {
 });
 
 
-exports.AllPlayers = async () => {
+exports.getAllPlayers = async () => {
     const players = await Player.findAll({
-      attributes: ["id", "name", "description","image"],
+        attributes: ["id", "name", "description", "image"],
     });
     return JSON.parse(JSON.stringify(players));
-  };
-  
+};
 
 
-  exports.getPlayerInfo = async (id) => {
+
+exports.getPlayerInfo = async (id) => {
     const player = await Player.findByPk(id);
     return JSON.parse(JSON.stringify(player));
-  };
-  
+};
+
