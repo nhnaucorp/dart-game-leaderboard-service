@@ -43,10 +43,8 @@ exports.AllPlayers = async () => {
   
 
 
-  exports.getPlayerId = async (id) => {
-    const players = await Player.findAll({
-      attributes: ["id", "name", "description","image"],
-    });
-    return JSON.parse(JSON.stringify(players));
+  exports.getPlayerInfo = async (id) => {
+    const player = await Player.findByPk(id);
+    return JSON.parse(JSON.stringify(player));
   };
   

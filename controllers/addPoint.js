@@ -1,10 +1,17 @@
+const { getPlayerInfo } = require("../models/Player");
 const { addPlayerPoint } = require("../models/Point");
 
 
 exports.addPlayerPoint = async ctx => {
     try {
         const { id } = ctx.params
-        // const players = await AllPlayers();
+        const isValidPlayer = await getPlayerInfo(id)
+        if (!isValidPlayer) {
+            ctx.body = {
+                success: false,
+                message: "Player not found"
+            }
+        }
         const { point } = ctx.request.body
         console.log(point, id);
         const playerPoint = await addPlayerPoint(id, point)
