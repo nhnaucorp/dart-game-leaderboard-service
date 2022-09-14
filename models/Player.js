@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 
+
 const sequelize = new Sequelize("dart-leaderboards", "root", "", {
     host: "localhost",
     port: "3306",
@@ -37,23 +38,43 @@ const Player = sequelize.define("players", {
         field: 'updated_at'
     }
 
-});
+})
 
+// const getPlayerLeaderboard = async () => {
+//     const leaderboard = await Player.findAll({
+//         attributes: ['id', [Point.sequelize.fn('sum', Point.sequelize.col('point')), 'total_point']],
+//         include: [
+//             {
+//                 model: Point,
+//                 attributes: []
+//             }
+//         ],
+//         group: ['player_id']
+//     })
+//     console.log(leaderboard);
+//     return leaderboard
+// }
 
-exports.getAllPlayers = async () => {
+const getAllPlayers = async () => {
     const players = await Player.findAll({
         attributes: ["id", "name", "description", "isPlaying", "image"],
     });
     return JSON.parse(JSON.stringify(players));
 };
 
+const setCurrentPlayerModel = async (id, isPlaying) => {
+    const currentPlayer = await Player.update(
+        { isPlaying: !isPlaying },
+        { where: { id: id } }
+    )
 
-exports.setCurrentPlayerModel = async (id) => {
-
+    return currentPlayer
 }
 
-exports.getPlayerInfo = async (id) => {
+const getPlayerInfo = async (id) => {
     const player = await Player.findByPk(id);
     return JSON.parse(JSON.stringify(player));
 };
+
+module.exports = { setCurrentPlayerModel, getAllPlayers, getPlayerInfo }
 

@@ -1,4 +1,6 @@
 const Sequelize = require("sequelize");
+const { Player } = require("./Player");
+
 const sequelize = new Sequelize("dart-leaderboards", "root", "", {
     host: "localhost",
     port: "3306",
@@ -31,6 +33,10 @@ const Point = sequelize.define("points", {
 
 
 });
+
+
+
+
 
 exports.getPointByPlayerId = async (playerId) => {
     const playerPoints = await Point.findAll({
