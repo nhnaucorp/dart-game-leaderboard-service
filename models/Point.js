@@ -58,6 +58,13 @@ exports.updatePlayerPoint = async (pointId, playerId) => {
 }
 
 
+exports.getCurrentPlayerPoints = async (playerId) => {
+
+    const playerPoints = await Point.sum('point', { where: { playerId: playerId } })
+    return { "total_point": playerPoints }
+
+}
+
 exports.getTotalPointByPlyer = async () => {
 
 

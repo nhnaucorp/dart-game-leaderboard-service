@@ -80,10 +80,18 @@ const setCurrentPlayerModel = async (id) => {
     return currentPlayer
 }
 
+const getCurrentPlayerModel = async () => {
+    const activePlayer = await Player.findOne({
+        where: { isPlaying: true },
+    });
+    return activePlayer
+
+}
+
 const getPlayerInfo = async (id) => {
     const player = await Player.findByPk(id);
     return JSON.parse(JSON.stringify(player));
 };
 
-module.exports = { setCurrentPlayerModel, getAllPlayers, getPlayerInfo }
+module.exports = { setCurrentPlayerModel, getAllPlayers, getPlayerInfo, getCurrentPlayerModel }
 
