@@ -62,11 +62,20 @@ const getAllPlayers = async () => {
     return JSON.parse(JSON.stringify(players));
 };
 
-const setCurrentPlayerModel = async (id, isPlaying) => {
+const setCurrentPlayerModel = async (id) => {
+    const activePlayer = await Player.findOne({
+        where: { isPlaying: true },
+    });
+    await Player.update(
+        { isPlaying: false },
+        { where: { id: activePlayer.id } }
+    )
+
     const currentPlayer = await Player.update(
-        { isPlaying: !isPlaying },
+        { isPlaying: true },
         { where: { id: id } }
     )
+    console.log(currentPlayer);
 
     return currentPlayer
 }

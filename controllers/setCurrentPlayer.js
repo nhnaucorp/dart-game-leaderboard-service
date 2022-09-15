@@ -3,7 +3,6 @@ const { setCurrentPlayerModel, getPlayerInfo } = require("../models/Player");
 exports.setCurrentPlayer = async ctx => {
     try {
         const { playerId } = ctx.params
-        const { isPlaying } = ctx.request.body
         const isValidPlayer = await getPlayerInfo(playerId)
         if (!isValidPlayer) {
             ctx.body = {
@@ -12,7 +11,7 @@ exports.setCurrentPlayer = async ctx => {
             }
         }
 
-        const currentPlayer = await setCurrentPlayerModel(playerId, isPlaying)
+        const currentPlayer = await setCurrentPlayerModel(playerId)
         ctx.response.body = currentPlayer;
 
     } catch (err) {
